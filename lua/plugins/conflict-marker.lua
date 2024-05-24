@@ -1,5 +1,6 @@
 return {
   'rhysd/conflict-marker.vim',
+  event = 'VeryLazy',
   init = function()
       -- disable the default highlight group
       vim.g.conflict_marker_highlight_group = ''
