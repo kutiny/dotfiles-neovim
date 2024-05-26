@@ -1,7 +1,7 @@
 return {
-    "tris203/precognition.nvim",
-    event = "VeryLazy",
-    config = {
+    -- "tris203/precognition.nvim",
+    -- event = "VeryLazy",
+    -- config = {
     -- startVisible = true,
     -- showBlankVirtLine = true,
     -- hints = {
@@ -23,5 +23,5 @@ return {
     --     PrevParagraph = { text = "{", prio = 1 },
     --     NextParagraph = { text = "}", prio = 1 },
     -- },
-    },
+    -- },
 }
