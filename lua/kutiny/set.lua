@@ -1,6 +1,11 @@
+-- set leader key
+vim.g.mapleader = " "
+
 vim.opt.guicursor = ""
 
+-- set number line
 vim.opt.nu = true
+-- set relative number line
 vim.opt.relativenumber = true
 
 vim.opt.tabstop = 4
@@ -30,8 +35,5 @@ vim.opt.updatetime = 50
 
 -- vim.opt.colorcolumn = "80"
 
-vim.g.mapleader = " "
 vim.showmode = false
-
-vim.cmd('highlight TODOHighlight guibg=#732f3b')
 
