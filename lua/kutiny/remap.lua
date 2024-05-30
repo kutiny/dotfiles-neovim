@@ -47,9 +47,6 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-vim.cmd("set cursorline")
--- vim.cmd("set cursorcolumn")
-
 -- Markdown preview
 vim.keymap.set("n", "<leader>p", ":MarkdownPreviewToggle\n")
 
@@ -59,15 +56,15 @@ vim.keymap.set("n", "<leader>lr", ":lua vim.lsp.buf.rename()\n")
 -- LSP Messages
 vim.keymap.set(
 	"n",
-	"<Leader>lj",
+	"]d",
 	"<cmd>lua vim.diagnostic.goto_next()<CR>",
 	{ silent = true, desc = "Next diagnostic" }
 )
 vim.keymap.set(
 	"n",
-	"<Leader>lk",
+	"[d",
 	"<cmd>lua vim.diagnostic.goto_prev()<CR>",
-	{ silent = true, desc = "Next diagnostic" }
+	{ silent = true, desc = "Prev diagnostic" }
 )
 
 -- GCompile
@@ -80,5 +77,11 @@ vim.keymap.set(
     "n",
     "<Leader>re",
     ":lua require'gcompile'.compile_and_run(true)<CR>"
+)
+
+vim.keymap.set(
+    "t",
+    "<Esc><Esc>",
+    "<C-\\><C-n>", { desc = "Exit terminal mode" }
 )
 
