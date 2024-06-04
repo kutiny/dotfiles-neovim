@@ -15,6 +15,10 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins", {})
+require("lazy").setup("plugins", {
+    change_detection = {
+        notify = false,
+    }
+})
 require("kutiny")
 
