@@ -27,8 +27,8 @@ return {
         -- REQUIRED
 
         vim.keymap.set("n", "<leader>aa", function() harpoon:list():add() end)
-        vim.keymap.set("n", "<leader><leader>", function() toggle_telescope(harpoon:list()) end)
-        -- vim.keymap.set("n", "<leader><leader>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+        -- vim.keymap.set("n", "<leader><leader>", function() toggle_telescope(harpoon:list()) end)
+        vim.keymap.set("n", "<leader><leader>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
         vim.keymap.set("n", "<leader>ax", function() harpoon:list():clear() end)
 

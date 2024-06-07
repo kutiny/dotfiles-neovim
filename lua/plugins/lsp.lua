@@ -3,14 +3,14 @@ return {
     branch = 'v2.x',
     dependencies = {
         -- LSP Support
-        {'neovim/nvim-lspconfig'},             -- Required
-        {'williamboman/mason.nvim'},           -- Optional
-        {'williamboman/mason-lspconfig.nvim'}, -- Optional
+        { 'neovim/nvim-lspconfig' },           -- Required
+        { 'williamboman/mason.nvim' },         -- Optional
+        { 'williamboman/mason-lspconfig.nvim' }, -- Optional
         -- Autocompletion
-        {'hrsh7th/nvim-cmp'},     -- Required
-        {'hrsh7th/cmp-nvim-lsp'}, -- Required
-        {'L3MON4D3/LuaSnip'},     -- Required
-        {'b0o/schemastore.nvim'} -- schema validators
+        { 'hrsh7th/nvim-cmp' },                -- Required
+        { 'hrsh7th/cmp-nvim-lsp' },            -- Required
+        { 'L3MON4D3/LuaSnip' },                -- Required
+        { 'b0o/schemastore.nvim' }             -- schema validators
     },
     config = function()
         local lsp = require('lsp-zero').preset({})
@@ -18,7 +18,7 @@ return {
         lsp.on_attach(function(client, bufnr)
             -- see :help lsp-zero-keybindings
             -- to learn the available actions
-            lsp.default_keymaps({buffer = bufnr})
+            lsp.default_keymaps({ buffer = bufnr })
         end)
 
         require('mason').setup({})
@@ -34,7 +34,6 @@ return {
                 'jsonls',
                 'yamlls',
                 'marksman',
-                'rust_analyzer',
             },
             handlers = {
                 lsp.default_setup,
@@ -72,7 +71,7 @@ return {
         })
 
         lsp.on_attach(function(client, bufnr)
-            local opts = {buffer = bufnr, remap = false}
+            local opts = { buffer = bufnr, remap = false }
             vim.keymap.set("n", "gd", function()
                 vim.lsp.buf.definition()
             end, opts)

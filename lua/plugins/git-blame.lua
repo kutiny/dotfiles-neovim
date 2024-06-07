@@ -6,6 +6,7 @@ return {
             delay = 100,
         })
     end,
+    event = "VeryLazy",
     init = function()
         vim.keymap.set(
             "n",
