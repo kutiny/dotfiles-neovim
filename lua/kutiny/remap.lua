@@ -35,7 +35,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
 
 -- Enable when lsp is configured
-vim.keymap.set("n", "<leader>f", function()
+vim.keymap.set("n", "<leader>ff", function()
     vim.lsp.buf.format()
 end)
 
