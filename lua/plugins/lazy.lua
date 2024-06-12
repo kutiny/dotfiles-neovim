@@ -1,6 +1,5 @@
 return {
   'christoomey/vim-tmux-navigator',
-  'kutiny/gcompile',
   -- 'github/copilot.vim',
   'windwp/nvim-ts-autotag',
   'nvim-tree/nvim-web-devicons',

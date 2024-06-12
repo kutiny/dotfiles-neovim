@@ -67,17 +67,6 @@ vim.keymap.set(
 	{ silent = true, desc = "Prev diagnostic" }
 )
 
--- GCompile
-vim.keymap.set(
-    "n",
-    "<Leader>rr",
-    ":lua require'gcompile'.compile_and_run()<CR>"
-)
-vim.keymap.set(
-    "n",
-    "<Leader>re",
-    ":lua require'gcompile'.compile_and_run(true)<CR>"
-)
 
 vim.keymap.set(
     "t",
