@@ -37,10 +37,14 @@ vim.opt.colorcolumn = "80"
 vim.opt.cursorcolumn = true
 vim.opt.cursorline = true
 vim.opt.culopt = "line,number"
+
 -- vim.cmd[[highlight CursorColumn guibg=#c83e4d]]
 vim.cmd[[highlight CursorLine guibg=#32373B]]
 vim.cmd[[highlight ColorColumn guibg=#F4B860]]
 vim.cmd[[highlight ColorColumn guibg=#5B5F97]]
+
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 vim.showmode = false
 
