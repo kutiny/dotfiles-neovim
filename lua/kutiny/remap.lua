@@ -55,16 +55,16 @@ vim.keymap.set("n", "<leader>lr", ":lua vim.lsp.buf.rename()\n")
 
 -- LSP Messages
 vim.keymap.set(
-	"n",
-	"]d",
-	"<cmd>lua vim.diagnostic.goto_next()<CR>",
-	{ silent = true, desc = "Next diagnostic" }
+    "n",
+    "]d",
+    "<cmd>lua vim.diagnostic.goto_next()<CR>",
+    { silent = true, desc = "Next diagnostic" }
 )
 vim.keymap.set(
-	"n",
-	"[d",
-	"<cmd>lua vim.diagnostic.goto_prev()<CR>",
-	{ silent = true, desc = "Prev diagnostic" }
+    "n",
+    "[d",
+    "<cmd>lua vim.diagnostic.goto_prev()<CR>",
+    { silent = true, desc = "Prev diagnostic" }
 )
 
 
@@ -73,4 +73,3 @@ vim.keymap.set(
     "<Esc><Esc>",
     "<C-\\><C-n>", { desc = "Exit terminal mode" }
 )
-
