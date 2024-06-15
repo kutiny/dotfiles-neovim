@@ -13,19 +13,26 @@ return {
             }
         })
         -- REQUIRED
-        --
+
         harpoon:extend({
             UI_CREATE = function(cx)
                 vim.api.nvim_buf_set_keymap(0, 'n', 'J', ":m .+1<CR>gv=gv", { noremap = true })
                 vim.api.nvim_buf_set_keymap(0, 'n', 'K', ":m .-2<CR>gv=gv", { noremap = true })
-                vim.keymap.set('n', 'l', function() harpoon.ui:select_menu_item({ vsplit = true }) end, { buffer = cx.bufnr })
-                vim.keymap.set('n', 'h', function() harpoon.ui:select_menu_item({ split = true }) end, { buffer = cx.bufnr })
+                vim.keymap.set('n', 'l', function() harpoon.ui:select_menu_item({ vsplit = true }) end,
+                    { buffer = cx.bufnr })
+                vim.keymap.set('n', 'h', function() harpoon.ui:select_menu_item({ split = true }) end,
+                    { buffer = cx.bufnr })
             end
         })
 
         vim.keymap.set("n", "<leader>aa", function() harpoon:list():add() end)
         vim.keymap.set("n", "<leader><leader>", function()
-            harpoon.ui:toggle_quick_menu(harpoon:list())
+            harpoon.ui:toggle_quick_menu(harpoon:list(), {
+                title = '  Working Files ',
+                border = { "╔", "═", "╗", "║", "╝", "═", "╚", "║" },
+                title_pos = 'center'
+            })
+
             -- local curbuf = vim.api.nvim_buf_get_name(0)
             -- if string.find(curbuf, "__harpoon-menu__", 1, true) then
             --     vim.api.nvim_buf_set_keymap(0, 'n', 'J', ":m .+1<CR>gv=gv", { noremap = true })
