@@ -48,3 +48,11 @@ vim.opt.splitbelow = true
 
 vim.showmode = false
 
+-- folds
+vim.opt.foldmethod = "expr"
+vim.opt.foldenable = true
+vim.opt.foldlevelstart = 99
+vim.opt.foldlevel = 99
+vim.opt.foldcolumn = "1"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
