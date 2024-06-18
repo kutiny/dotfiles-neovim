@@ -1,6 +1,7 @@
 return {
   'christoomey/vim-tmux-navigator',
   -- 'github/copilot.vim',
+  'tpope/vim-surround',
   'windwp/nvim-ts-autotag',
   'nvim-tree/nvim-web-devicons',
   'ntpeters/vim-better-whitespace',

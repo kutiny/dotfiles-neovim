@@ -39,8 +39,6 @@ vim.keymap.set("n", "<leader>ff", function()
     vim.lsp.buf.format()
 end)
 
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-
 -- tmux panels
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
@@ -73,3 +71,17 @@ vim.keymap.set(
     "<Esc><Esc>",
     "<C-\\><C-n>", { desc = "Exit terminal mode" }
 )
+
+-- vim.api.nvim_create_user_command(
+--     "ClearWorkspace",
+--     function()
+--         local buffers = {}
+--         for i, buf_handl in ipairs(vim.api.nvim_list_bufs()) do
+--             if vim.api.nvim_buf_is_loaded(buf_handl) then
+--                 buffers[i] = buf_handl
+--             end
+--         end
+--     end,
+--     {}
+-- )
+
