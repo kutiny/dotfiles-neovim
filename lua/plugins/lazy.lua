@@ -7,6 +7,7 @@ return {
   'tpope/vim-commentary',
   'prettier/vim-prettier',
   'rust-lang/rust.vim',
-  'simrat39/rust-tools.nvim'
+  'simrat39/rust-tools.nvim',
+  'mg979/vim-visual-multi',
 }
 
