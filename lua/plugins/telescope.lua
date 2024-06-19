@@ -1,13 +1,20 @@
 return {
     'nvim-telescope/telescope.nvim',
     version = '0.1.2',
-    dependencies = { {'nvim-lua/plenary.nvim'} },
+    dependencies = { { 'nvim-lua/plenary.nvim' } },
     config = function()
         local builtin = require('telescope.builtin')
-        vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
-        vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+        local themes = require('telescope.themes')
+        vim.keymap.set('n', '<leader>pf', function()
+            builtin.find_files(themes.get_dropdown({}))
+        end)
+        vim.keymap.set('n', '<C-p>', function()
+            builtin.git_files(themes.get_dropdown({}))
+        end, {})
         vim.keymap.set('n', '<leader>ps', function()
-            builtin.grep_string({ search = vim.fn.input("Grep > ") });
+            builtin.grep_string(themes.get_dropdown({
+                search = vim.fn.input("Grep > "),
+            }));
         end)
         vim.keymap.set('n', '<leader>fs', builtin.live_grep, {})
 

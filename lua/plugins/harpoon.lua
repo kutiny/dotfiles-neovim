@@ -30,7 +30,7 @@ return {
             harpoon.ui:toggle_quick_menu(harpoon:list(), {
                 title = '  Working Files ',
                 border = { "╔", "═", "╗", "║", "╝", "═", "╚", "║" },
-                title_pos = 'center'
+                title_pos = 'center',
             })
 
             -- local curbuf = vim.api.nvim_buf_get_name(0)
