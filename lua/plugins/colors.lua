@@ -12,13 +12,34 @@ function Color(color)
         color = theme
     end
 
+    local colors = require("catppuccin.palettes").get_palette()
+    local TelescopeColor = {
+        TelescopeMatching = { fg = colors.flamingo },
+        TelescopeSelection = { fg = colors.text, bg = colors.surface0, bold = true },
+
+        TelescopePromptPrefix = { bg = colors.surface0 },
+        TelescopePromptNormal = { bg = colors.surface0 },
+        TelescopeResultsNormal = { bg = colors.mantle },
+        TelescopePreviewNormal = { bg = colors.mantle },
+        TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
+        TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
+        TelescopePreviewBorder = { bg = colors.mantle, fg = colors.mantle },
+        TelescopePromptTitle = { bg = colors.pink, fg = colors.mantle },
+        TelescopeResultsTitle = { fg = colors.mantle },
+        TelescopePreviewTitle = { bg = colors.green, fg = colors.mantle },
+    }
+
+    for hl, col in pairs(TelescopeColor) do
+        vim.api.nvim_set_hl(0, hl, col)
+    end
+
     vim.cmd.colorscheme(color)
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
 vim.keymap.set('n', '<leader>t', function()
-    local t=vim.fn.input('Theme > ');
+    local t = vim.fn.input('Theme > ');
     Color(t)
 end)
 
@@ -30,35 +51,35 @@ return {
         config = function()
             require('catppuccin').setup({
                 flavour = "auto", -- latte, frappe, macchiato, mocha
-                background = { -- :h background
+                background = {    -- :h background
                     light = "latte",
                     dark = "mocha",
                 },
                 transparent_background = true, -- disables setting the background color.
-                show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-                term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+                show_end_of_buffer = false,    -- shows the '~' characters after the end of buffers
+                term_colors = false,           -- sets terminal colors (e.g. `g:terminal_color_0`)
                 dim_inactive = {
-                    enabled = false, -- dims the background color of inactive window
+                    enabled = false,           -- dims the background color of inactive window
                     shade = "dark",
-                    percentage = 0.15, -- percentage of the shade to apply to the inactive window
+                    percentage = 0.15,         -- percentage of the shade to apply to the inactive window
                 },
-                no_italic = false, -- Force no italic
-                no_bold = false, -- Force no bold
-                no_underline = false, -- Force no underline
-                styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-                comments = { "italic" }, -- Change the style of comments
-                conditionals = { "italic" },
-                loops = {},
-                functions = {},
-                keywords = {},
-                strings = {},
-                variables = {},
-                numbers = {},
-                booleans = {},
-                properties = {},
-                types = {},
-                operators = {},
-                -- miscs = {}, -- Uncomment to turn off hard-coded styles
+                no_italic = false,             -- Force no italic
+                no_bold = false,               -- Force no bold
+                no_underline = false,          -- Force no underline
+                styles = {                     -- Handles the styles of general hi groups (see `:h highlight-args`):
+                    comments = { "italic" },   -- Change the style of comments
+                    conditionals = { "italic" },
+                    loops = {},
+                    functions = {},
+                    keywords = {},
+                    strings = {},
+                    variables = {},
+                    numbers = {},
+                    booleans = {},
+                    properties = {},
+                    types = {},
+                    operators = {},
+                    -- miscs = {}, -- Uncomment to turn off hard-coded styles
                 },
                 color_overrides = {},
                 custom_highlights = {},
@@ -83,7 +104,7 @@ return {
     },
     {
         'Mofiqul/vscode.nvim',
-        config = function ()
+        config = function()
             local c = require('vscode.colors').get_colors()
             require("vscode").setup({
                 transparent = true,
@@ -97,14 +118,19 @@ return {
                 group_overrides = {
                     -- this supports the same val table as vim.api.nvim_set_hl
                     -- use colors from this colorscheme by requiring vscode.colors!
-                    Cursor = { fg=c.vscDarkBlue, bg=c.vscLightGreen, bold=true },
+                    Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
                 }
             })
         end
     },
     {
-        'srcery-colors/srcery-vim',
-        name = 'srcery',
+        'comfysage/evergarden',
+        priority = 1000, -- Colorscheme plugin is loaded first before any other plugins
+        opts = {
+            transparent_background = true,
+            contrast_dark = 'hard', -- 'hard'|'medium'|'soft'
+            overrides = {},   -- add custom overrides
+        }
     },
     {
         'rose-pine/neovim',
@@ -113,7 +139,7 @@ return {
         end,
         config = function()
             require("rose-pine").setup({
-                variant = "auto", -- auto, main, moon, or dawn
+                variant = "auto",      -- auto, main, moon, or dawn
                 dark_variant = "main", -- main, moon, or dawn
                 dim_inactive_windows = false,
                 extend_background_behind_borders = true,
@@ -121,7 +147,7 @@ return {
                 enable = {
                     terminal = true,
                     legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-                    migrations = true, -- Handle deprecated options automatically
+                    migrations = true,        -- Handle deprecated options automatically
                 },
 
                 styles = {
@@ -181,4 +207,3 @@ return {
         end
     }
 }
-
