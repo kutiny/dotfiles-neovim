@@ -1,7 +1,7 @@
 local theme = "rose-pine"
 local theme_file = "~/.nvim_theme"
 
-function Color(color)
+local function _set_colorscheme(color)
     if color then
         vim.fn.system("echo -n " .. color .. " > " .. theme_file)
     else
@@ -12,41 +12,132 @@ function Color(color)
         color = theme
     end
 
-    local colors = require("catppuccin.palettes").get_palette()
-    local TelescopeColor = {
-        TelescopeMatching = { fg = colors.flamingo },
-        TelescopeSelection = { fg = colors.text, bg = colors.surface0, bold = true },
+    -- local colors = require("catppuccin.palettes").get_palette()
+    -- local TelescopeColor = {
+    --     TelescopeMatching = { fg = colors.flamingo },
+    --     TelescopeSelection = { fg = colors.text, bg = colors.surface0, bold = true },
+    --     TelescopePromptPrefix = { bg = colors.surface0 },
+    --     TelescopePromptNormal = { bg = colors.surface0 },
+    --     TelescopeResultsNormal = { bg = colors.mantle },
+    --     TelescopePreviewNormal = { bg = colors.mantle },
+    --     TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
+    --     TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
+    --     TelescopePreviewBorder = { bg = colors.mantle, fg = colors.mantle },
+    --     TelescopePromptTitle = { bg = colors.pink, fg = colors.mantle },
+    --     TelescopeResultsTitle = { fg = colors.mantle },
+    --     TelescopePreviewTitle = { bg = colors.green, fg = colors.mantle },
+    -- }
 
-        TelescopePromptPrefix = { bg = colors.surface0 },
-        TelescopePromptNormal = { bg = colors.surface0 },
-        TelescopeResultsNormal = { bg = colors.mantle },
-        TelescopePreviewNormal = { bg = colors.mantle },
-        TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
-        TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
-        TelescopePreviewBorder = { bg = colors.mantle, fg = colors.mantle },
-        TelescopePromptTitle = { bg = colors.pink, fg = colors.mantle },
-        TelescopeResultsTitle = { fg = colors.mantle },
-        TelescopePreviewTitle = { bg = colors.green, fg = colors.mantle },
-    }
-
-    for hl, col in pairs(TelescopeColor) do
-        vim.api.nvim_set_hl(0, hl, col)
-    end
+    -- for hl, col in pairs(TelescopeColor) do
+    --     vim.api.nvim_set_hl(0, hl, col)
+    -- end
 
     vim.cmd.colorscheme(color)
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
+local function _get_theme_list()
+    local cmd = "cat ~/.dotfiles/nvim/lua/plugins/colors.lua | grep -E ' name = .*' | grep -v -E 'cmd' | tr -d ' '"
+    local output = vim.fn.system(cmd)
+    local content = vim.split(output, "\n")
+    local themes = {}
+
+    for _, v in ipairs(content) do
+        local t = string.gsub(v, "'", "")
+        t = string.gsub(t, "name=", "")
+        t = string.gsub(t, ",", "")
+        if t == "" then
+            goto continue
+        end
+        table.insert(themes, t)
+        ::continue::
+    end
+
+    return themes
+end
+
+local function open_theme_window(themes)
+    local win = vim.api.nvim_list_uis()
+    local width = 80
+
+    if #win > 0 then
+        width = math.floor(win[1].width * 0.7)
+    end
+
+    local height = 8
+    local bufnr = vim.api.nvim_create_buf(false, true)
+    local win_id = vim.api.nvim_open_win(bufnr, true, {
+        relative = "editor",
+        title = "Themes",
+        title_pos = "center",
+        row = math.floor(((vim.o.lines - height) / 2) - 1),
+        col = math.floor((vim.o.columns - width) / 2),
+        width = width,
+        height = height,
+        style = "minimal",
+        border = "single",
+    })
+
+    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, themes)
+    local current_theme = vim.g.colors_name
+
+    local function handle_exit()
+        _set_colorscheme(current_theme)
+        vim.cmd('q')
+    end
+
+    local function process_change()
+        local t = vim.api.nvim_get_current_line()
+        _set_colorscheme(t)
+        return t
+    end
+
+    vim.keymap.set('n', 'q', function()
+        handle_exit()
+    end, { buffer = bufnr, silent = true })
+
+    vim.keymap.set('n', '<CR>', function()
+        local t = process_change()
+        current_theme = t;
+        handle_exit()
+    end, { buffer = bufnr, silent = true })
+
+    vim.keymap.set('n', 'j', function()
+        local line_number = vim.api.nvim_win_get_cursor(win_id)[1]
+        local next_line = line_number + 1
+
+        if next_line > vim.api.nvim_buf_line_count(bufnr) then
+            next_line = 1
+        end
+
+        vim.cmd("norm" .. next_line .. 'G')
+        process_change()
+    end, { buffer = bufnr, silent = true })
+
+    vim.keymap.set('n', 'k', function()
+        local cursor = vim.api.nvim_win_get_cursor(win_id)
+
+        if cursor[1] == 1 then
+            cursor[1] = vim.api.nvim_buf_line_count(bufnr)
+        else
+            cursor[1] = cursor[1] - 1
+        end
+
+        vim.api.nvim_win_set_cursor(win_id, { cursor[1], cursor[2] })
+        process_change()
+    end, { buffer = bufnr, silent = true })
+end
+
 vim.keymap.set('n', '<leader>t', function()
-    local t = vim.fn.input('Theme > ');
-    Color(t)
+    local theme_list = _get_theme_list()
+    open_theme_window(theme_list)
 end)
 
 return {
     {
         'catppuccin/nvim',
-        name = "catppuccin",
+        name = 'catppuccin',
         priority = 1000,
         config = function()
             require('catppuccin').setup({
@@ -121,7 +212,8 @@ return {
                     Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
                 }
             })
-        end
+        end,
+        name = 'vscode',
     },
     {
         'comfysage/evergarden',
@@ -129,13 +221,14 @@ return {
         opts = {
             transparent_background = true,
             contrast_dark = 'hard', -- 'hard'|'medium'|'soft'
-            overrides = {},   -- add custom overrides
-        }
+            overrides = {},         -- add custom overrides
+        },
+        name = 'evergarden',
     },
     {
         'rose-pine/neovim',
         init = function()
-            Color()
+            _set_colorscheme()
         end,
         config = function()
             require("rose-pine").setup({
@@ -204,6 +297,7 @@ return {
                     -- end
                 end,
             })
-        end
+        end,
+        name = 'rose-pine',
     }
 }
