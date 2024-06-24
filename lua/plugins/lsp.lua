@@ -35,6 +35,7 @@ return {
                 'jsonls',
                 'yamlls',
                 'marksman',
+                'emmet_language_server',
             },
             handlers = {
                 lsp.default_setup,
