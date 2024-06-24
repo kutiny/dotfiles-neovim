@@ -1,5 +1,6 @@
 return {
     -- 'prichrd/netrw.nvim',
+    -- event = 'VeryLazy',
     -- config = function()
     --     require'netrw'.setup{
     --         icons = {

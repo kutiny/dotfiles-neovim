@@ -1,5 +1,6 @@
 return {
     'kutiny/gcompile.nvim',
+    event = 'VeryLazy',
     config = function()
         local mod = require('gcompile')
         mod.setup({

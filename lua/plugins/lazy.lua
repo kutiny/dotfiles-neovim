@@ -1,14 +1,12 @@
 return {
-  'christoomey/vim-tmux-navigator',
-  -- 'github/copilot.vim',
-  'tpope/vim-surround',
-  'windwp/nvim-ts-autotag',
-  'nvim-tree/nvim-web-devicons',
-  'ntpeters/vim-better-whitespace',
-  'tpope/vim-commentary',
-  'prettier/vim-prettier',
-  'rust-lang/rust.vim',
-  'simrat39/rust-tools.nvim',
-  'mg979/vim-visual-multi',
+	{ 'christoomey/vim-tmux-navigator', event = 'VeryLazy' },
+	--{ 'github/copilot.vim', event = 'VeryLazy' },
+	{ 'tpope/vim-surround', event = 'VeryLazy' },
+	{ 'windwp/nvim-ts-autotag', event = 'VeryLazy' },
+	{ 'nvim-tree/nvim-web-devicons', lazy = true },
+	{ 'ntpeters/vim-better-whitespace', event = 'VeryLazy' },
+	{ 'tpope/vim-commentary', event = 'VeryLazy' },
+	{ 'prettier/vim-prettier', event = 'VeryLazy' },
+	{ 'mg979/vim-visual-multi', event = 'VeryLazy' },
 }
 
