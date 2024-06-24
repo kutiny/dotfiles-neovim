@@ -3,7 +3,7 @@ return {
     event = 'VeryLazy',
     dependencies = {
         'nvim-tree/nvim-web-devicons',
-        lazy = true
+        lazy = true,
     },
     config = function()
         local theme = vim.g.colorscheme
