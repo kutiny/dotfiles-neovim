@@ -2,21 +2,27 @@ return {
     {
         'kutiny/colors.nvim',
         branch = 'main',
+        -- dev = true,
         config = function()
             local colors = require('colors')
-            colors:setup({
-                file = "~/.dotfiles/nvim/lua/plugins/colors.lua",
+            colors.setup({
                 enable_transparent_bg = true,
                 fallback_theme_name = 'evergarden',
-                -- theme_list = {
-                --     'evergarden',
-                --     'catuccin-mocha',
-                --     'vscode',
-                --     'dracula',
-                --     'rose-pine',
-                -- },
-                border = 'double',
-                height = 8,
+                hide_builtins = true,
+                ignore_themes = {
+                    'catppuccin-latte',
+                    'catppuccin-frappe',
+                    'catppuccin-macchiato',
+                    'catppuccin-mocha',
+                    'rose-pine-dawn',
+                    'rose-pine-moon',
+                    'rose-pine-main',
+                    'dracula-soft',
+                },
+                border = 'rounded',
+                title = ' Themes ',
+                title_position = 'center',
+                height = 10,
                 width = 60,
                 callback_fn = function()
                     require('lualine').setup()
@@ -29,7 +35,6 @@ return {
     {
         'catppuccin/nvim',
         name = 'catppuccin',
-        -- name = 'testline',
         priority = 1000,
         config = function()
             require('catppuccin').setup({
@@ -84,6 +89,7 @@ return {
     {
         'Mofiqul/dracula.nvim',
         name = 'dracula',
+        priority = 1000,
         config = function()
             local dracula = require("dracula")
             dracula.setup({
@@ -115,13 +121,13 @@ return {
                     black = "#191A21",
                 },
                 -- show the '~' characters after the end of buffers
-                show_end_of_buffer = true, -- default false
+                show_end_of_buffer = true,    -- default false
                 -- use transparent background
-                transparent_bg = true, -- default false
+                transparent_bg = true,        -- default false
                 -- set custom lualine background color
                 lualine_bg_color = "#44475a", -- default nil
                 -- set italic comment
-                italic_comment = true, -- default false
+                italic_comment = true,        -- default false
                 -- overrides the default highlights with table see `:h synIDattr`
                 overrides = {},
                 -- You can use overrides as table like this
@@ -141,6 +147,7 @@ return {
     },
     {
         'Mofiqul/vscode.nvim',
+        priority = 1000,
         config = function()
             local c = require('vscode.colors').get_colors()
             require("vscode").setup({
@@ -163,7 +170,7 @@ return {
     },
     {
         'comfysage/evergarden',
-        priority = 1000, -- Colorscheme plugin is loaded first before any other plugins
+        priority = 1000,
         opts = {
             transparent_background = true,
             contrast_dark = 'hard', -- 'hard'|'medium'|'soft'
@@ -173,6 +180,7 @@ return {
     },
     {
         'rose-pine/neovim',
+        priority = 1000,
         config = function()
             require("rose-pine").setup({
                 variant = "auto",      -- auto, main, moon, or dawn
