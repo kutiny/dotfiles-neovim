@@ -45,9 +45,6 @@ end)
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
--- Markdown preview
-vim.keymap.set("n", "<leader>p", ":MarkdownPreviewToggle\n")
-
 -- LSP Rename
 vim.keymap.set("n", "<leader>lr", ":lua vim.lsp.buf.rename()\n")
 

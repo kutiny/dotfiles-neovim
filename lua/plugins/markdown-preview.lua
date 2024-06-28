@@ -5,6 +5,8 @@ return {
     event = 'VeryLazy',
     init = function()
         vim.g.mkdp_filetypes = { "markdown" }
+        -- Markdown preview
+        vim.keymap.set("n", "<leader>p", ":MarkdownPreviewToggle\n", { silent = true })
     end,
     ft = { "markdown" },
 }
