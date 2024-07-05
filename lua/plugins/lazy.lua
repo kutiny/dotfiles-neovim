@@ -8,5 +8,4 @@ return {
     { 'tpope/vim-commentary',           event = 'VeryLazy' },
     { 'prettier/vim-prettier',          event = 'VeryLazy' },
     { 'mg979/vim-visual-multi',         event = 'VeryLazy' },
-    { 'smithbm2316/centerpad.nvim',     event = 'VeryLazy' },
 }

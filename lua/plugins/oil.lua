@@ -95,7 +95,7 @@ return {
             end,
             -- Sort file names in a more intuitive order for humans. Is less performant,
             -- so you may want to set to false if you work with large directories.
-            natural_order = true,
+            natural_order = false,
             sort = {
                 -- sort order can be "asc" or "desc"
                 -- see :help oil-columns to see which columns are sortable
@@ -166,7 +166,7 @@ return {
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
     init = function()
-        vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+        -- vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
         -- vim.keymap.set("n", "<leader>pv", "<CMD>Oil --float<CR>")
         vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>")
         vim.keymap.set("n", "<leader>pr", require('oil.actions').refresh.callback)
