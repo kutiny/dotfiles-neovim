@@ -39,9 +39,9 @@ vim.opt.cursorline = true
 vim.opt.culopt = "line,number"
 
 -- vim.cmd[[highlight CursorColumn guibg=#c83e4d]]
-vim.cmd[[highlight CursorLine guibg=#32373B]]
-vim.cmd[[highlight ColorColumn guibg=#F4B860]]
-vim.cmd[[highlight ColorColumn guibg=#5B5F97]]
+vim.cmd [[highlight CursorLine guibg=#32373B]]
+vim.cmd [[highlight ColorColumn guibg=#F4B860]]
+vim.cmd [[highlight ColorColumn guibg=#5B5F97]]
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -53,6 +53,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldenable = true
 vim.opt.foldlevelstart = 99
 vim.opt.foldlevel = 99
-vim.opt.foldcolumn = "1"
+vim.opt.foldcolumn = "0"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
